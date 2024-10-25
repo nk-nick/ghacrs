@@ -1,5 +1,10 @@
 name: 02 - Workflow Events
-on: push
+on:
+  push: 
+  pull_request:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
 
 jobs:
   echo:
@@ -7,6 +12,3 @@ jobs:
     steps:
       - name: Show the trigger
         run: echo "i have been trigering a(n) ${{ github.event_name }} event."
-
-
-
