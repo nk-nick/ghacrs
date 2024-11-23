@@ -1,8 +1,14 @@
 name: 06 - Contexts
+run-name: 06 - Contex | DEBUG - ${{ inputs.debug }}
 
 on: 
   push:
   workflow_dispatch:
+    inputs:
+      debug:
+        type: boolean
+        default: false
+
 
 jobs:
   echo-data:
@@ -11,9 +17,9 @@ jobs:
       - name: Display Information
         run: |
           echo "Event name: ${{ github.event_name }}"
+          echo "Actor: ${{ github.actor }}"
           echo "Ref: ${{ github.ref }}"
           echo "SHA: ${{ github.sha }}"
-          echo "Actor: ${{ github.actor }}"
           echo "Workflow: ${{ github.workflow }}"
           echo "Run ID: ${{ github.run_id }}"
           echo "Run number: ${{ github.run_number }}"
