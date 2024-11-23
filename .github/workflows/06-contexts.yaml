@@ -1,14 +1,12 @@
 name: 06 - Contexts
 run-name: 06 - Contex | DEBUG - ${{ inputs.debug }}
 
-on: 
-  push:
+on:
   workflow_dispatch:
     inputs:
       debug:
         type: boolean
         default: false
-
 
 env:
   MY_WORKFLOW_VAR: "workflow"
@@ -46,5 +44,14 @@ jobs:
         run: |
           echo "Workflow env: ${{ env.MY_WORKFLOW_VAR }}"
           echo "Overwritten env ${{ env.MY_OVERWRITTEN_VAR }}"
+
+  echo-data2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Env Variables
+        run: |
+          echo "Workflow env: $MY_WORKFLOW_VAR"
+          echo "Overwritten env $env.MY_OVERWRITTEN_VAR"
+         
           
              
