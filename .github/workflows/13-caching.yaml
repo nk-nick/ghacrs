@@ -7,6 +7,11 @@ on:
         type: boolean
         default: true
         description: Whether to execute cache step
+      node-version:
+        type: choice
+        options: [18.x,20.x,21.x]
+        default: 20.x
+        description: Node version
 
 jobs:
   build:
@@ -18,12 +23,21 @@ jobs:
         - name: Checkout Code
           uses: actions/checkout@v4
 
-        - name: Setup Node.js
+        - name: Setup Node
           uses: actions/setup-node@v3
           with: 
-            node-version: '20.x'
+            node-version: ${{ inputs.node-version }}
+
+        - name: Download cached dependencies
+          uses: actions/cache@v3 
+          if: ${{ inputs.use-cache }}
+          id: cache
+          with:
+            path: 04-using-actions/react-app/node_modules
+            key: deps-node-modules-${{ hashFiles('04-using-actions/react-app/package-lock.json') }}
 
         - name: Install Dependencies
+          if: ${{ steps.cache.outputs.cache-hit != 'true' }}
           run: npm ci
 
         - name: Testing
@@ -35,5 +49,5 @@ jobs:
         - name: Deploying to nonprod
           run: echo "Deploying to nonprod"
 
-
-
+#   install-deps:
+#     runs-on: ubuntu-latest
