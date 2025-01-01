@@ -4,35 +4,35 @@ on:
   workflow_dispatch:
 
 jobs:
-  backwards-compatibility:
-    name: ${{ matrix.os }}-${{ matrix.node-version }}
-    strategy:
-      fail-fast: false
-      matrix:
-        node-version: [18, 20]
-        os: [ubuntu-latest, windows-latest]
-        include:
-          - os: ubuntu-latest
-            tag: experimental
-          - os: ubuntu-latest
-            node-version: 21.x
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+  # backwards-compatibility:
+  #   name: ${{ matrix.os }}-${{ matrix.node-version }}
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       node-version: [18, 20]
+  #       os: [ubuntu-latest, windows-latest]
+  #       include:
+  #         - os: ubuntu-latest
+  #           tag: experimental
+  #         - os: ubuntu-latest
+  #           node-version: 21.x
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: ${{ matrix.node-version }}
 
-      - name: Fail if experimental
-        if: ${{ matrix.tag == 'experimental' }}
-        run: exit 1
+  #     - name: Fail if experimental
+  #       if: ${{ matrix.tag == 'experimental' }}
+  #       run: exit 1
 
-      - name: Perform some tests
-        run: |
-          echo "Running some tests..."
-          sleep 10
+  #     - name: Perform some tests
+  #       run: |
+  #         echo "Running some tests..."
+  #         sleep 10
 
-      - name: Upload test results
-        run: echo "Uploading test results"
+  #     - name: Upload test results
+  #       run: echo "Uploading test results"
 
   include-example:
     runs-on: ubuntu-latest
@@ -50,7 +50,8 @@ jobs:
             opacity: 100
           - color: red
             shape: triangle
+        exclude:
+          - opacity: 75
     steps:
       - name: Dummy step
-        #run: echo "${{ matrix.opacity || 'default-opacity' }}-${{ matrix.opacity || 'default-opacity' }}-${{ matrix.opacity || 'default-opacity' }}"
         run: echo "${{ matrix.color }}-${{ matrix.shape }}-${{ matrix.size }}-${{ matrix.opacity }}"
