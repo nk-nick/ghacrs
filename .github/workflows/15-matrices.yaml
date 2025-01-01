@@ -52,6 +52,8 @@ jobs:
             shape: triangle
         exclude:
           - color: green
+            shape: [circle, square]
+          - color: red
             shape: circle
     steps:
       - name: Dummy step
