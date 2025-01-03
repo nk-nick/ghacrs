@@ -18,6 +18,7 @@ jobs:
         steps:
             - name: Deploying to staging
               run: |
+                echo "Deploying to staging ..."
                 echo "MY_ENV_VALUE: ${{ env.MY_ENV_VALUE }}" 
     e2e-tests:
         runs-on: ubuntu-latest
