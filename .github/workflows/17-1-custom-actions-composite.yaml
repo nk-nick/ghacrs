@@ -1,16 +1,17 @@
 name: 17 - 1 - Custom Actions - Composite
-run-name: 17 - 1 - Custom Actions - Composite | env - ${{ inputs.target-env }}
+# run-name: 17 - 1 - Custom Actions - Composite | env - ${{ inputs.target-env }}
 
 env:
   working-directory: 04-using-actions/react-app
 
 on:
   workflow_dispatch:
-    inputs:
-      target-env:
-        type: choice
-        options: [dev, prod]
-        description: Select the target environment
+    # inputs:
+    #   target-env:
+    #     type: choice
+    #     options: [dev, prod]
+    #     default: dev
+    #     description: Select the target environment
 
 jobs:
   build:
@@ -26,7 +27,7 @@ jobs:
         with:
           node-version: 20.x
           working-dir: ${{ env.working-directory }}
-          target-env: ${{ inputs.target-env }}
+          # target-env: ${{ inputs.target-env }}
       - name: Test
         run: npm run test
       - name: Build
