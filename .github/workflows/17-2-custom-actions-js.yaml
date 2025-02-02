@@ -17,9 +17,9 @@ on:
           type: boolean
           default: false
 
-# permissions:
-#   contents: write
-#   pull-requests: write
+permissions:
+  contents: write
+  pull-requests: write
 
 jobs:
     dependency-update:
@@ -33,3 +33,4 @@ jobs:
                 base-branch: ${{ inputs.base-branch }}
                 target-branch: ${{ inputs.target-branch }}
                 working-directory: ${{ inputs.working-dir }}
+                gh-token: ${{ secrets.GITHUB_TOKEN }}
