@@ -1,13 +1,13 @@
 name: 16 - Working with Environments
-# run-name: 16 - Working with Environments | env - ${{ inputs.target-env }}
+run-name: 16 - Working with Environments | env - ${{ inputs.target-env }}
 
 on: 
   workflow_dispatch:
-    # inputs:
-    #     target-env:
-    #         type: environment
-    #         default: staging
-    #         description: staging env
+    inputs:
+        target-env:
+            type: environment
+            default: staging
+            description: staging env
 
 jobs:
     deploy-staging:
